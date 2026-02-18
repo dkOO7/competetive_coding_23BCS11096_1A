@@ -15,14 +15,15 @@ void solve() {
     for(int k =0;k<n;k++){
         int i = v[k];
         for(int j=0;j<31;j++){
+            // f[j]+= (i&(1<<j));
             if(i& (1<<j)){
-                f[j]++;
-            }
-            if(i& (1<<j)){
-                ans += (k+1-f[j]);
+                ans += (k-f[j]);
             }
             else{
                 ans += f[j];
+            }
+            if(i& (1<<j)){
+                f[j]++;
             }
 
         }
