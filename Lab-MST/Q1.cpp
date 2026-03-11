@@ -1,46 +1,18 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define jack420 ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-// #define int long long int
-#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
-void solve() {
-    // Place your problem-solving logic here.
-    int n ;
-    cin >> n ;
-    vector<pair<int,int >> nums(n);
-    for(int i =0;i<n;i++){
-        int u , v ;
-        cin >> u >> v;
-        nums[i] = {u,v};
-    }
+class Solution {
+public:
+    int minimumEffort(vector<vector<int>>& tasks) {
+        int n = tasks.size();
+        sort(tasks.begin(), tasks.end(), [](auto & a , auto & b){
+            if(abs(a[0]- a[1]) ==  abs(b[0]-b[1]))return a[1]>b[1];
+            return a[1]- a[0] < b[1]-b[0];
+        });
 
-    int sum = 0;
-    for(auto i : nums){
-        sum += i.first;
-    }
-    int  temp = sum ;
-    sort(nums.rbegin(), nums.rend(), [](auto &a ,auto &b){
-        if(a.first == b.first){
-            return a.second>b.second;
+        for(auto i : tasks)cout<<i[0]<<" "<<i[1]<<endl;
+        int ans =0;
+        int c=0,val=0;
+        for(auto i : tasks){
+            c = max(c + i[0], i[1]);
         }
-        return a.first<b.first;
-    });
-
-    int val = 0;
-    for(auto i : nums){
-        if(temp >= i.second)temp -= i.first;
-        else{
-            val += abs(temp -i.second);
-        }
+        return c;
     }
-    cout<< sum + abs(val);
-}
-int32_t main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
-        cout << endl;
-    }
-    return 0;
-}
+};
